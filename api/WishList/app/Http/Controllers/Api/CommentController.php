@@ -45,4 +45,38 @@ class CommentController extends Controller
         return response()->json($object);
 
     }
+
+    public function create(Request $request) {
+        $data = $request->validate([
+            'name'=> 'required|min:3',
+            'text'=> 'required|min:10,max:50'
+        ]);
+        
+        $Comment = Comment::create([
+            'name'=> $data['name']
+        ]);
+
+        if ($Comment) {
+            $object = [
+
+                "response" => 'Succes.Itemsaved correctly.',
+                "data" => $Comment
+    
+            ];
+    
+            return response()->json($object);
+        }else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+
+    }
+
+
+
 }

@@ -44,6 +44,34 @@ class CategoryController extends Controller
 
     }
 
+    public function create(Request $request) {
+        $data = $request->validate([
+            'name'=> 'required|min:3,max:20'
+        ]);
+        
+        $category = Category::create([
+            'name'=> $data['name']
+        ]);
 
+        if ($category) {
+            $object = [
+
+                "response" => 'Succes.Item saved correctly.',
+                "data" => $category
+    
+            ];
+    
+            return response()->json($object);
+        }else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+
+    }
 
 }
