@@ -74,4 +74,31 @@ class CategoryController extends Controller
 
     }
 
+    public function update(Request $request){
+        $data = $request->validate([
+            'id'=>'required|min:1',
+            'name' => 'required|min:3'
+        ]);
+        
+        $category = Category::where("id","=", $data['id'])->first();
+        $category->name=$data['name'];
+        
+        if($category->update()){
+            $object =[
+            "response"=>'Sucess. Item update successfully.',
+            "data"=> $category
+            ];
+
+            return response()->json($object);
+        } else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+    }
+
 }

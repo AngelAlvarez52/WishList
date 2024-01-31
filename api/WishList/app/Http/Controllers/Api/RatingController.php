@@ -45,4 +45,42 @@ class RatingController extends Controller
         return response()->json($object);
 
     }
+
+    public function create(Request $request) {
+        $data = $request->validate([
+            'rating'=> 'required|min:1,max:5',
+            'user_id'=> 'required|min:1,max:1000',
+            'product_id'=> 'required|min:1,max:1000'
+        ]);
+        
+        $Rating = Rating::create([
+            'rating'=> $data['rating'],
+            'user_id'=> $data['user_id'],
+            'product_id'=> $data['product_id']
+        ]);
+
+        if ($Rating) {
+            $object = [
+
+                "response" => 'Succes.Itemsaved correctly.',
+                "data" => $Rating
+    
+            ];
+    
+            return response()->json($object);
+        }else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+
+    }
+
+
+
+
 }

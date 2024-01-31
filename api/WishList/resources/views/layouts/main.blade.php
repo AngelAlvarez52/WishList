@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>WishList</title>
+		<title>@yield('title')</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,6 +19,7 @@
 								<li><a href="#">Inicio</a></li>
 								<li><a href="#">Regalos</a></li>
 								<li><a href="#">Perfil</a></li>
+								<li><a href="index.blade.php">Admin</a></li>
 							</ul>
 						</nav>
 						<nav class="main">
@@ -68,12 +69,10 @@
 									<li><a href="#" class="button large fit">Log In</a></li>
 								</ul>
 							</section>
-
 					</section>
-
+                @yield('content')
 				<!-- Main -->
 					<div id="main">
-
 						<!-- Post -->
 							<article class="post">
 								<header>
@@ -96,18 +95,8 @@
 									<ul class="actions">
 										<li><a href="single.html" class="button large">Continue Reading</a></li>
 									</ul>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon solid fa-heart">28</a></li>
-										<li><a href="#" class="icon solid fa-comment">128</a></li>
-									</ul>
 								</footer>
 							</article>
-						<!-- Pagination -->
-							<ul class="actions pagination">
-								<li><a href="" class="disabled button large previous">Previous Page</a></li>
-								<li><a href="#" class="button large next">Next Page</a></li>
-							</ul>
 					</div>
 
 				<!-- Sidebar -->

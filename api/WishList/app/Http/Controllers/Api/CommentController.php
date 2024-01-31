@@ -48,12 +48,15 @@ class CommentController extends Controller
 
     public function create(Request $request) {
         $data = $request->validate([
-            'name'=> 'required|min:3',
-            'text'=> 'required|min:10,max:50'
+            'text'=> 'required|min:10,max:50',
+            'user_id'=> 'required|min:1,max:50',
+            'product_id'=> 'required|min:1,max:50'
         ]);
         
         $Comment = Comment::create([
-            'name'=> $data['name']
+            'text'=> $data['text'],
+            'user_id'=> $data['user_id'],
+            'product_id'=> $data['product_id']
         ]);
 
         if ($Comment) {
@@ -77,6 +80,32 @@ class CommentController extends Controller
 
     }
 
+    public function update(Request $request){
+        $data = $request->validate([
+            'id'=>'required|min:1',
+            'text' => 'required|min:3'
+        ]);
+        
+        $comment = Comment::where("id","=", $data['id'])->first();
+        $comment->name=$data['text'];
+        
+        if($comment->update()){
+            $object =[
+            "response"=>'Sucess. Item update successfully.',
+            "data"=> $comment
+            ];
+
+            return response()->json($object);
+        } else {
+            $object = [
+                
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+    }
 
 
 }
