@@ -28,14 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('/categories/{id}',[CategoryController::class,'item']);
 Route::post('/categories/create',[CategoryController::class,'create']);
+Route::post('/categories/{id}/update',[CategoryController::class,'update']);
 
 Route::get('/Shops',[ShopController::class,'list']);
 Route::get('/Shops/{id}',[ShopController::class,'item']);
 Route::post('/Shops/create',[ShopController::class,'create']);
-
-Route::get('/Products',[ProductController::class,'list']);
-Route::get('/Products/{id}',[ProductController::class,'item']);
-Route::post('/Products/create',[ProductController::class,'create']);
 
 Route::get('/Gifts',[GiftController::class,'list']);
 Route::get('/Gifts/{id}',[GiftController::class,'item']);
@@ -52,3 +49,4 @@ Route::post('/Comments/create',[CommentController::class,'create']);
 Route::get('/Users',[UserController::class,'list']);
 Route::get('/Users/{id}',[UserController::class,'item']);
 Route::post('/Users/create',[UserController::class,'create']);
+Route::post('/Users/{id}/update',[UserController::class,'update']);

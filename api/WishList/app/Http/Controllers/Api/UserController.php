@@ -58,8 +58,8 @@ class UserController extends Controller
     }
     public function create(Request $request) {
         $data = $request->validate([
-            'name'=> 'required|min:5,max:50',
-            'surname'=> 'required|min:5,max:50',
+            'name'=> 'required|min:3,max:50',
+            'surname'=> 'required|min:3,max:50',
             'email'=> 'required|min:1,max:50',
             'phone'=> 'required|min:1,max:50',
             'password'=> 'required|min:1,max:50',

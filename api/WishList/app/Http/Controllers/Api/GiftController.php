@@ -22,6 +22,8 @@ class GiftController extends Controller
                 "name" => $Gift->name,
                 "description" => $Gift->description,
                 "url" => $Gift->url,
+                "price" => $Gift->price,
+                "image" => $Gift->image,
                 "category_id" => $Gift->category_id,
                 "user_id" => $Gift->user_id,
                 "shop_id" => $Gift->shop_id
@@ -42,6 +44,8 @@ class GiftController extends Controller
             "name" => $Gift->name,
             "description" => $Gift->description,
             "url" => $Gift->url,
+            "price" => $Gift->price,
+            "image" => $Gift->image,
             "category_id" => $Gift->category_id,
             "user_id" => $Gift->user_id,
             "shop_id" => $Gift->shop_id
@@ -57,6 +61,8 @@ class GiftController extends Controller
             'name'=> 'required|min:5,max:50',
             'description'=> 'required|min:5,max:50',
             'url'=> 'required|min:1,max:50',
+            'price'=> 'required|min:1,max:50',
+            'image'=> 'required|min:1,max:100',
             'category_id'=> 'required|min:1,max:50',
             'user_id'=> 'required|min:1,max:50',
             'shop_id'=> 'required|min:1,max:50'
@@ -66,6 +72,8 @@ class GiftController extends Controller
             'name'=> $data['name'],
             'description'=> $data['description'],
             'url'=> $data['url'],
+            'price'=> $data['price'],
+            'image'=> $data['image'],
             'category_id'=> $data['category_id'],
             'user_id'=> $data['user_id'],
             'shop_id'=> $data['shop_id']
@@ -97,13 +105,18 @@ class GiftController extends Controller
             'id'=>'required|min:1',
             'name' => 'required|min:3',
             'description' => 'required|min:3',
-            'url' => 'required|min:3'
+            'url' => 'required|min:3',
+            'price' => 'required|min:1',
+            'image' => 'required|min:1'
+            
         ]);
         
         $gift = Gift::where("id","=", $data['id'])->first();
         $gift->name=$data['name'];
         $gift->description=$data['description'];
         $gift->url=$data['url'];
+        $gift->price=$data['price'];
+        $gift->image=$data['image'];
         
         if($gift->update()){
             $object =[
