@@ -77,5 +77,36 @@ class ShopController extends Controller
 
     }
 
+    public function update(Request $request){
+        $data = $request->validate([
+            'id'=>'required|min:1',
+            'name' => 'required|min:3',
+            'adress' => 'required|min:3',
+            'cel' => 'required|min:3'
+        ]);
+        
+        $shop = Shop::where("id","=", $data['id'])->first();
+        $shop->name=$data['name'];
+        $shop->adress=$data['adress'];
+        $shop->cel=$data['cel'];
+        
+        if($shop->update()){
+            $object =[
+            "response"=>'Sucess. Item update successfully.',
+            "data"=> $shop
+            ];
+
+            return response()->json($object);
+        } else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+    }
+
 
 }

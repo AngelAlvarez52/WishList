@@ -21,7 +21,7 @@ class CommentController extends Controller
                 "id" => $Comment->id,
                 "text" => $Comment->text,
                 "user_id" => $Comment->user_id,
-                "product_id" => $Comment->product_id
+                "gift_id" => $Comment->gift_id
 
             ];
 
@@ -38,7 +38,7 @@ class CommentController extends Controller
             "id" => $Comment->id,
             "text" => $Comment->text,
             "user_id" => $Comment->user_id,
-            "product_id" => $Comment->product_id
+            "gift_id" => $Comment->gift_id
 
         ];
 
@@ -50,13 +50,13 @@ class CommentController extends Controller
         $data = $request->validate([
             'text'=> 'required|min:10,max:50',
             'user_id'=> 'required|min:1,max:50',
-            'product_id'=> 'required|min:1,max:50'
+            'gift_id'=> 'required|min:1,max:50'
         ]);
         
         $Comment = Comment::create([
             'text'=> $data['text'],
             'user_id'=> $data['user_id'],
-            'product_id'=> $data['product_id']
+            'gift_id'=> $data['gift_id']
         ]);
 
         if ($Comment) {

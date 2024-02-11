@@ -21,7 +21,7 @@ class RatingController extends Controller
                 "id" => $Rating->id,
                 "rating" => $Rating->rating,
                 "user_id" => $Rating->user_id,
-                "product_id" => $Rating->product_id
+                "gift_id" => $Rating->gift_id
 
             ];
 
@@ -38,7 +38,7 @@ class RatingController extends Controller
             "id" => $Rating->id,
             "rating" => $Rating->rating,
             "user_id" => $Rating->user_id,
-            "product_id" => $Rating->product_id
+            "gift_id" => $Rating->gift_id
 
         ];
 
@@ -50,13 +50,13 @@ class RatingController extends Controller
         $data = $request->validate([
             'rating'=> 'required|min:1,max:5',
             'user_id'=> 'required|min:1,max:1000',
-            'product_id'=> 'required|min:1,max:1000'
+            'gift_id'=> 'required|min:1,max:1000'
         ]);
         
         $Rating = Rating::create([
             'rating'=> $data['rating'],
             'user_id'=> $data['user_id'],
-            'product_id'=> $data['product_id']
+            'gift_id'=> $data['gift_id']
         ]);
 
         if ($Rating) {
@@ -85,13 +85,13 @@ class RatingController extends Controller
             'rating' => 'required|min:3'
         ]);
         
-        $category = Rating::where("id","=", $data['id'])->first();
-        $category->name=$data['name'];
+        $rating = Rating::where("id","=", $data['id'])->first();
+        $rating->name=$data['name'];
         
-        if($category->update()){
+        if($rating->update()){
             $object =[
             "response"=>'Sucess. Item update successfully.',
-            "data"=> $category
+            "data"=> $rating
             ];
 
             return response()->json($object);

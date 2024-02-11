@@ -97,5 +97,42 @@ class UserController extends Controller
 
     }
 
+    public function update(Request $request){
+        $data = $request->validate([
+            'name'=> 'required|min:3,max:50',
+            'surname'=> 'required|min:3,max:50',
+            'email'=> 'required|min:1,max:50',
+            'phone'=> 'required|min:1,max:50',
+            'password'=> 'required|min:1,max:50',
+            'image'=> 'required|min:1,max:50'
+            
+        ]);
+        
+        $user = User::where("id","=", $data['id'])->first();
+        $user->name=$data['name'];
+        $user->surname=$data['surname'];
+        $user->email=$data['email'];
+        $user->phone=$data['phone'];
+        $user->password=$data['password'];
+        $user->image=$data['image'];
+        
+        if($user->update()){
+            $object =[
+            "response"=>'Sucess. Item update successfully.',
+            "data"=> $user
+            ];
+
+            return response()->json($object);
+        } else {
+            $object = [
+
+                "response" => 'Error:Something went wrong, please try again.',
+    
+            ];
+    
+            return response()->json($object);
+        }
+    }
+
 
 }
