@@ -60,23 +60,16 @@ class GiftController extends Controller
         $data = $request->validate([
             'name'=> 'required|min:5,max:50',
             'description'=> 'required|min:5,max:50',
-            'url'=> 'required|min:1,max:50',
+            'url'=> 'required|min:1',
             'price'=> 'required|min:1,max:50',
-            'image'=> 'required|min:1,max:100',
-            'category_id'=> 'required|min:1,max:50',
-            'user_id'=> 'required|min:1,max:50',
-            'shop_id'=> 'required|min:1,max:50'
+            'image'=> 'required|min:1,max:100'
         ]);
-        
         $Gift = Gift::create([
             'name'=> $data['name'],
             'description'=> $data['description'],
             'url'=> $data['url'],
             'price'=> $data['price'],
-            'image'=> $data['image'],
-            'category_id'=> $data['category_id'],
-            'user_id'=> $data['user_id'],
-            'shop_id'=> $data['shop_id']
+            'image'=> $data['image']
         ]);
 
         if ($Gift) {
@@ -102,10 +95,9 @@ class GiftController extends Controller
 
     public function update(Request $request){
         $data = $request->validate([
-            'id'=>'required|min:1',
             'name' => 'required|min:3',
             'description' => 'required|min:3',
-            'url' => 'required|min:3',
+            'url' => 'required|min:1',
             'price' => 'required|min:1',
             'image' => 'required|min:1'
             

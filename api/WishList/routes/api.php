@@ -3,10 +3,10 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GiftController;
-use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,3 +54,6 @@ Route::get('/Users',[UserController::class,'list']);
 Route::get('/Users/{id}',[UserController::class,'item']);
 Route::post('/Users/create',[UserController::class,'create']);
 Route::post('/Users/{id}/update',[UserController::class,'update']);
+
+Route::post('/login',[AuthController::class,'login']);
+Route::middleware('auth:api')->get('/getUser', [AuthController::class, 'getUser']);
