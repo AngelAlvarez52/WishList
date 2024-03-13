@@ -29,13 +29,15 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getUser(Request $request)
-    {
-        $user = $request->user(); // Obtener el usuario autenticado desde el token
-
-        return response()->json([
-            'profile' => $user,
-            'message' => 'success'
-        ]);
+    public function showProfile()
+{
+    $user = auth()->user();
+    return response()->json([
+        'profile' => $user,
+        'message' => 'success'
+    ]);
+}
+    public function logout(Request $request){
+        
     }
 }

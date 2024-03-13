@@ -56,4 +56,6 @@ Route::post('/Users/create',[UserController::class,'create']);
 Route::post('/Users/{id}/update',[UserController::class,'update']);
 
 Route::post('/login',[AuthController::class,'login']);
-Route::middleware('auth:api')->get('/getUser', [AuthController::class, 'getUser']);
+Route::middleware('auth:api')->get('/userprofile', function (Request $request) {
+    return $request->user();
+});

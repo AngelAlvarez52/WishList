@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gifts', function (Blueprint $table) {
+        Schema::create('levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->string('url', 2048);
-            $table->integer('category_id');
-            $table->integer('user_id');
-            $table->integer('shop_id');
+            $table->integer('status')->default(1);
             $table->timestamps();
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('level_id')->after('image');
         });
     }
 
@@ -28,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gifts');
+        Schema::dropIfExists('levels');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('level_id');
+        });
     }
+    
 };

@@ -8,30 +8,28 @@ use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-    public function list () {
+    public function list(Request $request) {
+        // Obtener el ID de usuario del parámetro de consulta
+        $userId = $request->query('user_id');
 
-        $Gifts = Gift::all();
+        // Filtrar los regalos por el ID de usuario
+        $gifts = Gift::where('user_id', $userId)->get();
 
-        $list = [];
-
-        foreach($Gifts as $Gift){
-
-            $objetc = [
-
-                "id" => $Gift->id,
-                "name" => $Gift->name,
-                "description" => $Gift->description,
-                "url" => $Gift->url,
-                "price" => $Gift->price,
-                "image" => $Gift->image,
-                "category_id" => $Gift->category_id,
-                "user_id" => $Gift->user_id,
-                "shop_id" => $Gift->shop_id
-
+        // Construir la respuesta JSON
+        $list = $gifts->map(function($gift) {
+            return [
+                "id" => $gift->id,
+                "name" => $gift->name,
+                "description" => $gift->description,
+                "url" => $gift->url,
+                "price" => $gift->price,
+                "image" => $gift->image,
+                "category_id" => $gift->category_id,
+                "user_id" => $gift->user_id,
+                "shop_id" => $gift->shop_id
             ];
+        });
 
-            array_push($list,$objetc);
-        }
         return response()->json($list);
     }
     public function item ($id) {
@@ -95,11 +93,12 @@ class GiftController extends Controller
 
     public function update(Request $request){
         $data = $request->validate([
+            'id' => 'required|integer',
             'name' => 'required|min:3',
             'description' => 'required|min:3',
             'url' => 'required|min:1',
             'price' => 'required|min:1',
-            'image' => 'required|min:1'
+            'image' => 'required|min:1',
             
         ]);
         
