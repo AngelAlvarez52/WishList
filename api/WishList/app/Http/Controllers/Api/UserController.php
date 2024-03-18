@@ -24,7 +24,6 @@ class UserController extends Controller
                 "email" => $User->email,
                 "phone" => $User->phone,
                 "email_verified_at" => $User->email_verified_at,
-                "password" => $User->password,
                 "image" => $User->image,
                 "level_id" => $User->level_id,
                 "remember_token" => $User->remember_token
@@ -48,7 +47,6 @@ class UserController extends Controller
             "email" => $User->email,
             "phone" => $User->phone,
             "email_verified_at" => $User->email_verified_at,
-            "password" => $User->password,
             "image" => $User->image,
             "level_id" => $User->level_id,
             "remember_token" => $User->remember_token
@@ -66,7 +64,6 @@ class UserController extends Controller
             'phone'=> 'required|min:1,max:50',
             'password'=> 'required|min:1,max:50',
             'image'=> 'required|min:1,max:50',
-            'level_id'=> 'required|min:1,max:2'
         ]);
         
         $User = User::create([
@@ -76,7 +73,6 @@ class UserController extends Controller
             'phone'=> $data['phone'],
             'password'=> $data['password'],
             'image'=> $data['image'],
-            'level_id'=> $data['level_id']
         ]);
 
         if ($User) {
@@ -107,6 +103,7 @@ class UserController extends Controller
             'surname'=> 'required|min:3,max:50',
             'email'=> 'required|min:1,max:50',
             'phone'=> 'required|min:1,max:50',
+            'image'=> 'required|min:1'
             
         ]);
         
@@ -115,6 +112,7 @@ class UserController extends Controller
         $user->surname=$data['surname'];
         $user->email=$data['email'];
         $user->phone=$data['phone'];
+        $user->image=$data['image'];
         
         if($user->update()){
             $object =[

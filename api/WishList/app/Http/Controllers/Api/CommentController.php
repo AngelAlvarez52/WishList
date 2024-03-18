@@ -29,6 +29,29 @@ class CommentController extends Controller
         }
         return response()->json($list);
     }
+
+    public function comments_gift(Request $request) {
+        // Obtener el ID del regalo del parámetro de consulta
+        $giftId = $request->query('gift_id');
+    
+        // Filtrar los comentarios por el ID del regalo
+        $comments = Comment::where('gift_id', $giftId)->get();
+    
+        // Construir la respuesta JSON
+        $list = $comments->map(function($comment) {
+            return [
+                "id" => $comment->id,
+                "text" => $comment->text,
+                "user_id" => $comment->user_id,
+                "gift_id" => $comment->gift_id,
+                "created_at" => $comment->created_at,
+                "updated_at" => $comment->updated_at
+            ];
+        });
+    
+        return response()->json($list);
+    }
+
     public function item ($id) {
 
         $Comment = Comment::where('id','=',$id)->first();
@@ -48,9 +71,9 @@ class CommentController extends Controller
 
     public function create(Request $request) {
         $data = $request->validate([
-            'text'=> 'required|min:10,max:50',
-            'user_id'=> 'required|min:1,max:50',
-            'gift_id'=> 'required|min:1,max:50'
+            'text'=> 'required',
+            'user_id'=> 'required',
+            'gift_id'=> 'required',
         ]);
         
         $Comment = Comment::create([
@@ -82,12 +105,12 @@ class CommentController extends Controller
 
     public function update(Request $request){
         $data = $request->validate([
-            'id'=>'required|min:1',
-            'text' => 'required|min:3'
+            'id'=>'required',
+            'text' => 'required'
         ]);
         
         $comment = Comment::where("id","=", $data['id'])->first();
-        $comment->name=$data['text'];
+        $comment->text=$data['text'];
         
         if($comment->update()){
             $object =[
@@ -107,5 +130,30 @@ class CommentController extends Controller
         }
     }
 
+    public function delete($id) {
+        // Buscar el comentario por su ID
+        $comment = Comment::find($id);
+        
+        // Verificar si el comentario existe
+        if (!$comment) {
+            $object = [
+                "response" => 'Error: Comment not found.'
+            ];
+            return response()->json($object, 404); // 404: Not Found
+        }
+    
+        // Intentar eliminar el comentario
+        if ($comment->delete()) {
+            $object = [
+                "response" => 'Success: Comment deleted successfully.'
+            ];
+            return response()->json($object);
+        } else {
+            $object = [
+                "response" => 'Error: Something went wrong while deleting the comment. Please try again.'
+            ];
+            return response()->json($object, 500); // 500: Internal Server Error
+        }
+    }
 
 }

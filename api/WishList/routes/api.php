@@ -36,19 +36,26 @@ Route::post('/Shops/create',[ShopController::class,'create']);
 Route::post('/Shops/{id}/update',[ShopController::class,'update']);
 
 Route::get('/Gifts',[GiftController::class,'list']);
+Route::get('/gitf_user',[GiftController::class,'gitf_user']);
 Route::get('/Gifts/{id}',[GiftController::class,'item']);
 Route::post('/Gifts/create',[GiftController::class,'create']);
 Route::post('/Gifts/{id}/update',[GiftController::class,'update']);
+Route::delete('/Gifts/delete/{id}', [GiftController::class, 'delete']);
 
 Route::get('/Ratings',[RatingController::class,'list']);
+Route::get('/rating_gift', [RatingController::class, 'rating_gift']);
 Route::get('/Ratings/{id}',[RatingController::class,'item']);
 Route::post('/Ratings/create',[RatingController::class,'create']);
 Route::post('/Ratings/{id}/update',[RatingController::class,'update']);
+Route::delete('/Ratings/delete/{id}', [RatingController::class, 'delete']);
 
 Route::get('/Comments',[CommentController::class,'list']);
+Route::get('/comments_gift',[CommentController::class,'comments_gift']);
 Route::get('/Comments/{id}',[CommentController::class,'item']);
 Route::post('/Comments/create',[CommentController::class,'create']);
 Route::post('/Comments/{id}/update',[CommentController::class,'update']);
+Route::delete('/comments/delete/{id}', [CommentController::class, 'delete']);
+
 
 Route::get('/Users',[UserController::class,'list']);
 Route::get('/Users/{id}',[UserController::class,'item']);
@@ -59,3 +66,4 @@ Route::post('/login',[AuthController::class,'login']);
 Route::middleware('auth:api')->get('/userprofile', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);

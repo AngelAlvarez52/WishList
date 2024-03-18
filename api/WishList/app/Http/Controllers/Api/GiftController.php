@@ -8,7 +8,34 @@ use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-    public function list(Request $request) {
+
+    public function list () {
+
+        $Gifts = Gift::all();
+
+        $list = [];
+
+        foreach($Gifts as $gift){
+
+            $objetc = [
+
+                "id" => $gift->id,
+                "name" => $gift->name,
+                "description" => $gift->description,
+                "url" => $gift->url,
+                "price" => $gift->price,
+                "image" => $gift->image,
+                "category_id" => $gift->category_id,
+                "user_id" => $gift->user_id,
+                "shop_id" => $gift->shop_id
+
+            ];
+
+            array_push($list,$objetc);
+        }
+        return response()->json($list);
+    }
+    public function gitf_user(Request $request) {
         // Obtener el ID de usuario del parámetro de consulta
         $userId = $request->query('user_id');
 
@@ -60,14 +87,20 @@ class GiftController extends Controller
             'description'=> 'required|min:5,max:50',
             'url'=> 'required|min:1',
             'price'=> 'required|min:1,max:50',
-            'image'=> 'required|min:1,max:100'
+            'image'=> 'required',
+            'category_id'=> 'required|min:1,max:100',
+            'user_id'=> 'required|min:1,max:100',
+            'shop_id'=> 'required|min:1,max:100',
         ]);
         $Gift = Gift::create([
             'name'=> $data['name'],
             'description'=> $data['description'],
             'url'=> $data['url'],
             'price'=> $data['price'],
-            'image'=> $data['image']
+            'image'=> $data['image'],
+            'category_id'=> $data['category_id'],
+            'user_id'=> $data['user_id'],
+            'shop_id'=> $data['shop_id']
         ]);
 
         if ($Gift) {
@@ -98,32 +131,52 @@ class GiftController extends Controller
             'description' => 'required|min:3',
             'url' => 'required|min:1',
             'price' => 'required|min:1',
-            'image' => 'required|min:1',
-            
+            'image' => 'sometimes|min:1', // El campo de imagen ahora es opcional
         ]);
         
-        $gift = Gift::where("id","=", $data['id'])->first();
-        $gift->name=$data['name'];
-        $gift->description=$data['description'];
-        $gift->url=$data['url'];
-        $gift->price=$data['price'];
-        $gift->image=$data['image'];
+        $gift = Gift::find($data['id']);
+        if(!$gift) {
+            return response()->json(["response" => 'Error: Gift not found.'], 404);
+        }
+    
+        $gift->name = $data['name'];
+        $gift->description = $data['description'];
+        $gift->url = $data['url'];
+        $gift->price = $data['price'];
+    
+        // Solo actualiza la imagen si se proporcionó
+        if(isset($data['image'])) {
+            $gift->image = $data['image'];
+        }
         
-        if($gift->update()){
-            $object =[
-            "response"=>'Sucess. Item update successfully.',
-            "data"=> $gift
+        if($gift->save()){
+            $object = [
+                "response" => 'Success. Item updated successfully.',
+                "data" => $gift
             ];
-
             return response()->json($object);
         } else {
             $object = [
-
-                "response" => 'Error:Something went wrong, please try again.',
-    
+                "response" => 'Error: Something went wrong, please try again.',
             ];
-    
-            return response()->json($object);
+            return response()->json($object, 500);
         }
     }
+    
+
+
+    public function delete($id) {
+        $gift = Gift::find($id);
+    
+        if (!$gift) {
+            return response()->json(['response' => 'Error: Gift not found.'], 404);
+        }
+    
+        if ($gift->delete()) {
+            return response()->json(['response' => 'Success: Gift deleted successfully.']);
+        } else {
+            return response()->json(['response' => 'Error: Something went wrong while deleting the gift.'], 500);
+        }
+    }
+    
 }

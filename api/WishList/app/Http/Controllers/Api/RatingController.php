@@ -29,6 +29,27 @@ class RatingController extends Controller
         }
         return response()->json($list);
     }
+
+    public function rating_gift(Request $request) {
+        // Obtener el ID del regalo del parámetro de consulta
+        $giftId = $request->query('gift_id');
+    
+        // Filtrar los comentarios por el ID del regalo
+        $ratings = Rating::where('gift_id', $giftId)->get();
+    
+        // Construir la respuesta JSON
+        $list = $ratings->map(function($rating) {
+            return [
+                "id" => $rating->id,
+            "rating" => $rating->rating,
+            "user_id" => $rating->user_id,
+            "gift_id" => $rating->gift_id
+            ];
+        });
+    
+        return response()->json($list);
+    }
+
     public function item ($id) {
 
         $Rating = Rating::where('id','=',$id)->first();
@@ -48,64 +69,45 @@ class RatingController extends Controller
 
     public function create(Request $request) {
         $data = $request->validate([
-            'rating'=> 'required|min:1,max:5',
+            'rating'=> 'required|min:1|max:5',
             'user_id'=> 'required|min:1,max:1000',
             'gift_id'=> 'required|min:1,max:1000'
         ]);
         
-        $Rating = Rating::create([
-            'rating'=> $data['rating'],
-            'user_id'=> $data['user_id'],
-            'gift_id'=> $data['gift_id']
-        ]);
-
-        if ($Rating) {
-            $object = [
-
-                "response" => 'Succes.Itemsaved correctly.',
-                "data" => $Rating
+        $rating = Rating::updateOrCreate(
+            ['user_id' => $data['user_id'], 'gift_id' => $data['gift_id']],
+            ['rating' => $data['rating']]
+        );
     
-            ];
-    
-            return response()->json($object);
-        }else {
-            $object = [
-
-                "response" => 'Error:Something went wrong, please try again.',
-    
-            ];
-    
-            return response()->json($object);
-        }
+        return response()->json(['success' => true, 'data' => $rating]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request, $id){
         $data = $request->validate([
-            'id'=>'required|min:1',
-            'rating' => 'required|min:3'
+            'rating' => 'required|min:1|max:5'
         ]);
         
-        $rating = Rating::where("id","=", $data['id'])->first();
-        $rating->name=$data['name'];
-        
-        if($rating->update()){
-            $object =[
-            "response"=>'Sucess. Item update successfully.',
-            "data"=> $rating
-            ];
-
-            return response()->json($object);
-        } else {
-            $object = [
-
-                "response" => 'Error:Something went wrong, please try again.',
+        $rating = Rating::findOrFail($id);
+        $rating->rating = $data['rating'];
+        $rating->save();
     
-            ];
-    
-            return response()->json($object);
-        }
+        return response()->json(['success' => true, 'data' => $rating]);
     }
 
-
+    public function delete($id) {
+        // Buscar el rating por su ID
+        $rating = Rating::find($id);
+    
+        // Verificar si el rating existe
+        if (!$rating) {
+            return response()->json(['success' => false, 'message' => 'Rating not found'], 404);
+        }
+    
+        // Eliminar el rating
+        $rating->delete();
+    
+        return response()->json(['success' => true, 'message' => 'Rating deleted successfully']);
+    }
+    
 
 }
