@@ -9,5 +9,5 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','email','password'];
+    protected $fillable = ['name','adress','cel'];
 }

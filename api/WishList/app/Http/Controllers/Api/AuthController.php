@@ -45,5 +45,4 @@ class AuthController extends Controller
         'message' => 'success'
     ]);
 }
-
 }
