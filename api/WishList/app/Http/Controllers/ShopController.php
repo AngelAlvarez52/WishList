@@ -8,11 +8,19 @@ use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $shops = Shop::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->name;
+        $shops = Shop::where('name','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "shops" => $shops,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.shop.index', compact('shops'));
     }
+
 
     public function edit($id)
     {

@@ -24,6 +24,15 @@
             </li>
         </ol>
         
+        <div class="d-md-flex justify-content-md-end">
+    <form action="{{ route('rating.index') }}" method="GET">
+        <div class="btn-group">
+            <input type="text" name="rating" class="form-control">
+            <input type="submit" value="Buscar" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
         <div class="mb-3">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRatingModal"><i class="fas fa-plus"></i> Añadir Regalo</button>
         </div>

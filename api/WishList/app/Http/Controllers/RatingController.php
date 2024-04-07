@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Validator;
 
 class RatingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ratings = Rating::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->rating;
+        $ratings = Rating::where('rating','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "ratings" => $ratings,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.rating.index', compact('ratings'));
     }
 

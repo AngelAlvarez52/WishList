@@ -23,9 +23,17 @@
                 </div>
             </li>
         </ol>
-        
-        <table class="table table-hover" style="border: 2px solid #212529; color: #212529;">
 
+        <div class="d-md-flex justify-content-md-end">
+    <form action="{{ route('comment.index') }}" method="GET">
+        <div class="btn-group">
+            <input type="text" name="text" class="form-control">
+            <input type="submit" value="Buscar" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+        <table class="table table-hover" style="border: 2px solid #212529; color: #212529;">
             <thead>
                 <tr>
                     <th>Registro</th>

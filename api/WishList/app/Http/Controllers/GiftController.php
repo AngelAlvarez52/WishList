@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $gifts = Gift::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->name;
+        $gifts = Gift::where('name','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "gifts" => $gifts,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.gift.index', compact('gifts'));
     }
 

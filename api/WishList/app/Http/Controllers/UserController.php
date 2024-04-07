@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->name;
+        $users = User::where('name','LIKE','%'.$busqueda.'%')
+                        ->orWhere('surname','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "users" => $users,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.user.index', compact('users'));
     }
+
 
     public function edit($id)
     {

@@ -9,9 +9,17 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->name;
+        $categories = Category::where('name','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "categories" => $categories,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.category.index', compact('categories'));
     }
 
@@ -47,12 +55,12 @@ public function update(Request $request, $id)
     $categories = Category::find($id);
 
     if (!$categories) {
-        return redirect()->route('category')->with('error', 'La Categoría no existe.');
+        return redirect()->route('category.index')->with('error', 'La Categoría no existe.');
     }
 
     $categories->delete();
 
-    return redirect()->route('category')->with('success', 'Categoria eliminada correctamente!');
+    return redirect()->route('category.index')->with('success', 'Categoria eliminada correctamente!');
 }   
 
     public function store(Request $request)
@@ -63,6 +71,6 @@ public function update(Request $request, $id)
 
     Category::create($request->all());
 
-    return redirect()->route('category')->with('success', 'Categoría creada correctamente.');
+    return redirect()->route('category.index')->with('success', 'Categoría creada correctamente.');
 }
 }

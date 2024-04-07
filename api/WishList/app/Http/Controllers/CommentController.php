@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::orderBy('id', 'asc')->paginate(10);
+        $busqueda = $request->text;
+        $comments = Comment::where('text','LIKE','%'.$busqueda.'%')
+                        ->orderBy('id', 'asc')
+                        ->paginate(10);
+        $data = [
+            "comments" => $comments,
+            'busqueda'=>$busqueda
+        ];
         return view('admin.comment.index', compact('comments'));
     }
 
