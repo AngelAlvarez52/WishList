@@ -36,9 +36,9 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 small fw-bolder">
                 <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="resume.html">Regalos</a></li>
-                <li class="nav-item"><a class="nav-link" href="projects.html">Opiniones</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Descargar</a></li>
+                <li class="nav-item"><a class="nav-link" href="#regalos">Regalos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#opiniones">Opiniones</a></li>
+                <li class="nav-item"><a class="nav-link" href="#descargar">Descargar</a></li>
             </ul>
         </div>
         <div>
@@ -189,7 +189,7 @@
                 </div>
             </header>
 <!-- About Section-->
-<section class="bg-light py-5">
+<section id="regalos" class="bg-light py-5">
     <div class="container px-5">
         <div class="text-center my-5">
             <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Los deseos de otros usuarios</span></h2>
@@ -306,7 +306,7 @@
     </div>
 </section>
 
-<section class="bg-light py-5">
+<section id="opiniones" class="bg-light py-5">
 <div class="text-center my-5">
     <h2><span class="text-gradient d-inline">Calificaciones y Opiniones</span></h2>
 </div>
@@ -519,28 +519,31 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-6">
-            <section class="bg-light py-5">
-                <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-xxl-8">
-                            <div class="text-center my-5">
-                                <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Aqui va</span></h2>
-                                <p class="lead fw-light mb-4">a ir</p>
-                                <p class="text-muted">Sobre la empresa</p>
-                            </div>
-                        </div>
-                    </div>
+        <section class="bg-light py-5">
+    <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xxl-8">
+                <div class="text-center my-5">
+                    <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Haz que cada regalo cuente</span></h2>
+                    <p class="lead fw-light mb-4">Descubre el placer de regalar lo perfecto</p>
+                    <p class="text-muted">Con WishList, decir "no sé qué regalar" es cosa del pasado. Únete a nuestra comunidad y crea tu perfil de deseos para compartir con amigos y familiares. Ya sea tu cumpleaños, aniversario o cualquier ocasión especial, [Nombre de la App] hace fácil para los demás saber exactamente qué te haría feliz. ¡Explora, publica, y recibe los regalos perfectos que siempre has querido sin las conjeturas!</p>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
         </div>
         <div class="col-lg-6">
-            <section class="bg-light py-5">
+            <section id="descargar" class="bg-light py-5">
                 <div class="container px-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-xxl-8">
                             <div class="text-center my-5">
                                 <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Descarga la App</span></h2>
-                                <img src="{{ asset('images/qr-code.png') }}" alt="" width="200" height="200">
+                                <img src="{{ asset('images/qr-code.png') }}" alt="" width="200" height="215">
+                                <br>
+                                <p>Qr para descargar la app</p>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -549,6 +552,25 @@
         </div>
     </div>
 </div>
+
+<section class="bg-light py-5">
+    <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xxl-8">
+                <div class="text-start my-5">
+                    <h5>Contactar a Soporte</h5>
+                    <p>¿Necesitas ayuda? Estamos aquí para ayudarte. Puedes contactar a nuestro equipo de soporte de las siguientes maneras:</p>
+                    <ul>
+                        <li>Correo electrónico: support@WishList.com</li>
+                        <li>Teléfono: +1234567890</li>
+                        <li>Horario de atención: Lunes a Viernes, de 9:00 am a 6:00 pm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         </main>
         <!-- Footer-->

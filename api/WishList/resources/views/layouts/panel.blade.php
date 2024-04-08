@@ -14,7 +14,7 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3">Dashboard</a>
+    <a class="navbar-brand ps-3">WishList</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -55,11 +55,17 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
+                            @if(auth()->user()->level_id == 3)
                             <a class="nav-link" href="{{ route('category.index') }}">Categorias</a>
+                            @endif
                             <a class="nav-link" href="{{ route('comment.index') }}">Comentarios</a>
                             <a class="nav-link" href="{{ route('gift.index') }}">Regalos</a>
+                            @if(auth()->user()->level_id == 3)
                             <a class="nav-link" href="{{ route('rating.index') }}">Ratings</a>
+                            @endif
+                            @if(auth()->user()->level_id == 3)
                             <a class="nav-link" href="{{ route('shop.index') }}">Tiendas</a>
+                            @endif
                             <a class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
                         </nav>
                     </div>
