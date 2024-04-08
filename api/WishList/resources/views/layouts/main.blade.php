@@ -35,7 +35,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 small fw-bolder">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#regalos">Regalos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#opiniones">Opiniones</a></li>
                 <li class="nav-item"><a class="nav-link" href="#descargar">Descargar</a></li>
@@ -52,7 +52,7 @@
 
 
             <!-- Header-->
-            <header class="py-5">
+            <header id="inicio" class="py-5">
                 <div class="container px-5 pb-5">
                     <div class="row gx-5 align-items-center">
                         <div class="col-xxl-5">
