@@ -33,9 +33,6 @@
     </form>
 </div>
 
-        <div class="mb-3">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addGiftModal"><i class="fas fa-plus"></i> Añadir Regalo</button>
-        </div>
 
         <div class="table-responsive">
             <table class="table table-hover" style="border: 2px solid #212529; color: #212529;">
