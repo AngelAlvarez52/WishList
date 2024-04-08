@@ -15,7 +15,7 @@
 @section('content')
 
 <div class="row">
-    @if(auth()->user()->level_id == 3)
+    @if(auth()->user()->level_id == 1)
         <div class="col-xl-3 col-md-6 category-card" data-title="Categorias">
             <div id="card1" class="card bg-primary text-white mb-4">
                 <div class="card-body">Categorias</div>
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    @if(auth()->user()->level_id == 3)
+    @if(auth()->user()->level_id == 1)
         <div class="col-xl-3 col-md-6 category-card" data-title="Ratings">
             <div id="card4" class="card bg-danger text-white mb-4">
                 <div class="card-body">Ratings</div>

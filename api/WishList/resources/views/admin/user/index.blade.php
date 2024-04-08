@@ -48,7 +48,7 @@
                         <th>Correo</th>
                         <th>Telefono</th>
                         <th>Nivel</th>
-                        @if(auth()->user()->level_id == 3)
+                        @if(auth()->user()->level_id == 1)
                         <th>Acciones</th>
                         @endif
                     </tr>
@@ -64,7 +64,7 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->level_id }}</td>
                         <td>
-                        @if(auth()->user()->level_id == 3)
+                        @if(auth()->user()->level_id == 1)
                             <div class="btn-group">
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteGiftModal{{$user->id}}"><i class="fas fa-trash-alt"></i></button>
                             </div>
@@ -145,8 +145,8 @@
                         <label for="level_id" class="form-label">Nivel de cuenta</label>
                         <select class="form-select" id="level_id" name="level_id" required>
                             <option value="2">Empleado</option>
-                            @if(auth()->user()->level_id == 3)
-                            <option value="3">Administrador</option>
+                            @if(auth()->user()->level_id == 1)
+                            <option value="1">Administrador</option>
                             @endif
                         </select>
                     </div>

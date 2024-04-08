@@ -55,15 +55,15 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            @if(auth()->user()->level_id == 3)
+                            @if(auth()->user()->level_id == 1)
                             <a class="nav-link" href="{{ route('category.index') }}">Categorias</a>
                             @endif
                             <a class="nav-link" href="{{ route('comment.index') }}">Comentarios</a>
                             <a class="nav-link" href="{{ route('gift.index') }}">Regalos</a>
-                            @if(auth()->user()->level_id == 3)
+                            @if(auth()->user()->level_id == 1)
                             <a class="nav-link" href="{{ route('rating.index') }}">Ratings</a>
                             @endif
-                            @if(auth()->user()->level_id == 3)
+                            @if(auth()->user()->level_id == 1)
                             <a class="nav-link" href="{{ route('shop.index') }}">Tiendas</a>
                             @endif
                             <a class="nav-link" href="{{ route('user.index') }}">Usuarios</a>

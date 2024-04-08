@@ -43,14 +43,14 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // Verificar si el usuario tiene un level_id válido
-        if ($user->level_id != 2 && $user->level_id != 3) {
+        if ($user->level_id != 1 && $user->level_id != 2) {
             // Si el nivel no es válido, cerrar la sesión y redirigir con un mensaje de error
             Auth::logout();
             return redirect('/login')->with('error', 'No tienes permiso para acceder.');
         }
 
         // Si el usuario tiene un nivel válido, redirigir según corresponda
-        if ($user->level_id != 3) {
+        if ($user->level_id != 1) {
             return redirect()->intended('/admin');
         } elseif ($user->level_id != 2) {
             return redirect()->intended('/admin');
