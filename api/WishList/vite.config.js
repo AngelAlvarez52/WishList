@@ -7,8 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/landing_styles.css',
                 'resources/css/styles.css',
-                'resources/sass/app.scss'
-
+                'resources/sass/app.scss',
+                'resources/sass/_variables.scss'
             ],
             refresh: true,
         }),
